@@ -5,6 +5,8 @@ const pool = require("./db");
 const app = express();
 const path = require('path');
 const crypto = require('crypto');
+const port = process.env.PORT || 3000;
+
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
@@ -17,6 +19,9 @@ app.use(session({
 }));
 app.set("view engine", "ejs");
 
+const add = require("./routes/add");
+const view = require("./routes/view");
+const generate = require("./routes/generate");
 
 
 
@@ -86,7 +91,10 @@ app.get("/dashboard", (req, res) => {
     res.render("Dashboard", { username: req.session.username.toUpperCase() });
 });
 
-const port = process.env.PORT || 3000;
+app.use('/add', add);
+app.use('/view', view);
+app.use('/generate', generate);
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });

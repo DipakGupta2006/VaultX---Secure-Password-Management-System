@@ -1,0 +1,229 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Segoe UI, sans-serif;
+}
+
+body {
+    background: #f5f6fa;
+}
+
+/* Container */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px 20px;
+}
+
+/* Card */
+
+.card {
+    width: 100%;
+    max-width: 700px;
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, .08);
+}
+
+.card h1 {
+    text-align: center;
+    margin-bottom: 30px;
+
+    color: #333;
+}
+
+.card h1 i {
+    color: #6C4DF6;
+}
+
+/* Form */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: 600;
+
+    color: #333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-size: 15px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+
+    border-color: #6C4DF6;
+}
+
+/* Password Box */
+
+.password-box {
+    position: relative;
+}
+
+.password-box input {
+    padding-right: 45px;
+}
+
+.password-box i {
+
+    position: absolute;
+
+    right: 15px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    cursor: pointer;
+
+    color: #777;
+}
+
+/* Buttons */
+
+.btn-group {
+    margin-bottom: 20px;
+}
+
+.generate-btn {
+
+    width: 100%;
+
+    background: #6C4DF6;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    transition: .3s;
+}
+
+.generate-btn:hover {
+    opacity: .9;
+}
+
+/* Checkbox */
+
+.checkbox-group {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+/* Save Button */
+
+.save-btn {
+
+    width: 100%;
+
+    background: #222;
+
+    color: white;
+
+    border: none;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.save-btn:hover {
+
+    background: #6C4DF6;
+}
+
+/* Mobile */
+
+@media(max-width:768px) {
+
+    .card {
+        padding: 25px;
+    }
+
+    .card h1 {
+        font-size: 1.6rem;
+    }
+
+}
+
+
+@media (max-width: 768px){
+
+    .container{
+        padding:20px 12px;
+    }
+
+    .card{
+        padding:20px;
+        border-radius:12px;
+    }
+
+    .card h1{
+        font-size:1.4rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea{
+        font-size:14px;
+        padding:10px;
+    }
+
+    .generate-btn,
+    .save-btn{
+        padding:12px;
+        font-size:14px;
+    }
+
+}
