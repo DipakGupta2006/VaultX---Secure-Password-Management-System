@@ -1,0 +1,216 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI,sans-serif;
+}
+
+body{
+    background:#f5f6fa;
+}
+
+.container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px 20px;
+}
+
+.card{
+
+    width:100%;
+    max-width:650px;
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:18px;
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,.08);
+}
+
+.card h1{
+
+    text-align:center;
+
+    margin-bottom:10px;
+
+    color:#333;
+}
+
+.card h1 i{
+    color:#6C4DF6;
+}
+
+.subtitle{
+
+    text-align:center;
+
+    color:#666;
+
+    margin-bottom:30px;
+}
+
+.form-group{
+
+    margin-bottom:20px;
+}
+
+.form-group label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+}
+
+.form-group input{
+
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    outline:none;
+}
+
+.form-group input:focus{
+
+    border-color:#6C4DF6;
+}
+
+.options{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+    margin-bottom:25px;
+}
+
+.options label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.generate-btn{
+
+    width:100%;
+
+    background:#6C4DF6;
+
+    color:white;
+
+    border:none;
+
+    padding:14px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    margin-bottom:20px;
+}
+
+.generate-btn:hover{
+    opacity:.9;
+}
+
+.result-box{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:15px;
+}
+
+.result-box input{
+
+    flex:1;
+
+    padding:12px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    background:#fafafa;
+}
+
+.copy-btn{
+
+    width:55px;
+
+    border:none;
+
+    background:#222;
+
+    color:white;
+
+    border-radius:10px;
+
+    cursor:pointer;
+}
+
+.copy-btn:hover{
+
+    background:#6C4DF6;
+}
+
+.strength{
+
+    font-weight:600;
+
+    color:#333;
+
+    margin-bottom:10px;
+}
+
+.copy-msg{
+
+    display:none;
+
+    color:green;
+
+    font-weight:600;
+}
+
+@media(max-width:768px){
+
+    .card{
+
+        padding:25px;
+    }
+
+    .card h1{
+
+        font-size:1.6rem;
+    }
+
+    .result-box{
+
+        flex-direction:column;
+    }
+
+    .copy-btn{
+
+        width:100%;
+        height:45px;
+    }
+
+}
