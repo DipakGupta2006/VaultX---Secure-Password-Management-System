@@ -17,6 +17,9 @@ app.use(session({
 }));
 app.set("view engine", "ejs");
 
+
+
+
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
 });
@@ -80,7 +83,7 @@ app.get("/dashboard", (req, res) => {
         return res.redirect("/");
     }
 
-    res.render("Dashboard", { username: req.session.username });
+    res.render("Dashboard", { username: req.session.username.toUpperCase() });
 });
 
 const port = process.env.PORT || 3000;
