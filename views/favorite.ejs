@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VaultX - Favorites</title>
+
+    <link rel="stylesheet" href="/css/favorite.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <%- include("partials/navbar") %>
+
+        <div class="container">
+
+            <div class="header">
+
+                <h1>
+                    <i class="fa-solid fa-star"></i>
+                    Favorite Passwords
+                </h1>
+
+                <a href="/view" class="back-btn">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    &nbsp;View All Passwords
+                </a>
+
+            </div>
+
+            <% if(passwords.length===0){ %>
+
+                <div class="empty-state">
+
+                    <i class="fa-regular fa-star"></i>
+
+                    <h2>No Favorite Passwords Found</h2>
+
+                    <p>
+                        Mark passwords as favorites to see them here.
+                    </p>
+
+                </div>
+
+                <% } else { %>
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>ID</th>
+                                    <th>App Name</th>
+                                    <th>Category</th>
+                                    <th>Username</th>
+                                    <th>Password</th>
+                                    <th>Notes</th>
+                                    <th>Favorite</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <% passwords.forEach(password=> { %>
+
+                                    <tr>
+
+                                        <td>
+                                            <%= password.id %>
+                                        </td>
+
+                                        <td>
+                                            <%= password.app_name %>
+                                        </td>
+
+                                        <td>
+                                            <%= password.category %>
+                                        </td>
+
+                                        <td>
+                                            <%= password.username %>
+                                        </td>
+
+                                        <td>
+
+                                            <span class="password-text" data-password="<%= password.password %>">
+
+                                                ********
+
+                                            </span>
+
+                                            <button class="show-btn">
+
+                                                <i class="fa-solid fa-eye"></i>
+
+                                            </button>
+
+                                        </td>
+
+                                        <td class="notes-column">
+
+                                            <% if(password.notes){ %>
+
+                                                <%= password.notes %>
+
+                                                    <% } else { %>
+
+                                                        -
+
+                                                        <% } %>
+
+                                        </td>
+
+                                        <td>
+                                            ⭐
+                                        </td>
+
+                                    </tr>
+
+                                    <% }) %>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    <% } %>
+
+        </div>
+
+        <script>
+
+            const buttons =
+                document.querySelectorAll(".show-btn");
+
+            buttons.forEach(button => {
+
+                button.addEventListener("click", () => {
+
+                    const span =
+                        button.parentElement.querySelector(".password-text");
+
+                    if (span.innerText === "********") {
+
+                        span.innerText =
+                            span.dataset.password;
+
+                        button.innerHTML =
+                            '<i class="fa-solid fa-eye-slash"></i>';
+
+                    }
+                    else {
+
+                        span.innerText = "********";
+
+                        button.innerHTML =
+                            '<i class="fa-solid fa-eye"></i>';
+
+                    }
+
+                });
+
+            });
+
+        </script>
+
+</body>
+
+</html>

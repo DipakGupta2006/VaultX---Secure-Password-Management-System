@@ -22,7 +22,7 @@ app.set("view engine", "ejs");
 const add = require("./routes/add");
 const view = require("./routes/view");
 const generate = require("./routes/generate");
-
+const favorite = require("./routes/favorite");
 
 
 app.get("/", (req, res) => {
@@ -94,6 +94,7 @@ app.get("/dashboard", (req, res) => {
 app.use('/add', add);
 app.use('/view', view);
 app.use('/generate', generate);
+app.use('/favorite', favorite);
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
