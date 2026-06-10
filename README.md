@@ -76,7 +76,6 @@ This project is being developed as a full-stack backend-focused application to s
 
 ### Backend
 
-* Node.js
 * Express.js
 
 ### Database
