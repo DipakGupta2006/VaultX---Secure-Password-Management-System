@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Login Register Page | Password Toggle</title>
+    <style>
+        :root {
+            /* Dark Gradient Shiny Theme - Nightfall Premium */
+            --primary-color: #6C5CE7;
+            --secondary-color: #A855F7;
+            --primary-dark: #4a3bb5;
+            --black: #0a0a0f;
+            --white: #ffffff;
+            --gray: #1e1e2e;
+            --gray-2: #a0a0c0;
+            --card-bg: rgba(30, 30, 46, 0.85);
+
+            /* Social colors refined for dark theme */
+            --facebook-color: #4267B2;
+            --google-color: #DB4437;
+            --twitter-color: #1DA1F2;
+            --insta-color: #E1306C;
+
+            /* Glow effects */
+            --glow-primary: 0 0 20px rgba(108, 92, 231, 0.5);
+            --glow-secondary: 0 0 15px rgba(168, 85, 247, 0.4);
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100vh;
+            overflow: hidden;
+            background: #0a0a0f;
+        }
+
+        .container {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            height: 100vh;
+        }
+
+        .col {
+            width: 50%;
+        }
+
+        .align-items-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .form-wrapper {
+            width: 100%;
+            max-width: 28rem;
+        }
+
+        .form {
+            padding: 1.5rem;
+            background: rgba(18, 18, 28, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            width: 100%;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), var(--glow-primary);
+            border: 1px solid rgba(108, 92, 231, 0.3);
+            transform: scale(0);
+            transition: 0.5s ease-in-out;
+            transition-delay: 1s;
+        }
+
+        /* Input group styling */
+        .input-group {
+            position: relative;
+            width: 100%;
+            margin: 1rem 0;
+        }
+
+        .input-group i:first-child {
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            transform: translateY(-50%);
+            font-size: 1.4rem;
+            color: var(--gray-2);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Toggle icon (right side) shiny */
+        .toggle-password-icon {
+            position: absolute;
+            top: 50%;
+            right: 1rem;
+            transform: translateY(-50%);
+            font-size: 1.4rem;
+            color: var(--gray-2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 3;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.8rem;
+            height: 1.8rem;
+            border-radius: 50%;
+        }
+
+        .toggle-password-icon:hover {
+            color: var(--primary-color);
+            text-shadow: 0 0 8px var(--primary-color);
+            background-color: rgba(108, 92, 231, 0.1);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 1rem 3rem;
+            font-size: 1rem;
+            background-color: rgba(26, 26, 36, 0.9);
+            border-radius: 0.75rem;
+            border: 1px solid rgba(108, 92, 231, 0.2);
+            outline: none;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input::placeholder {
+            color: rgba(160, 160, 192, 0.6);
+        }
+
+        .input-group input[type="password"],
+        .input-group input[type="text"] {
+            padding-right: 3rem;
+        }
+
+        .input-group input:focus {
+            border: 1px solid var(--primary-color);
+            box-shadow: 0 0 15px rgba(108, 92, 231, 0.4);
+            background-color: rgba(30, 30, 46, 0.95);
+        }
+
+        .form button {
+            cursor: pointer;
+            width: 100%;
+            padding: 0.75rem 0;
+            border-radius: 0.75rem;
+            border: none;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            font-size: 1.1rem;
+            font-weight: 600;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+        }
+
+        .form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.5);
+            background: linear-gradient(135deg, #7c6ee8, #b86ef7);
+        }
+
+        .form p {
+            margin: 1rem 0;
+            font-size: 0.75rem;
+            color: var(--gray-2);
+        }
+
+        .form p span {
+            color: var(--gray-2);
+        }
+
+        .form p b {
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .form p b:hover {
+            text-shadow: 0 0 5px var(--primary-color);
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .social-list {
+            margin: 2rem 0;
+            padding: 1rem;
+            border-radius: 1.5rem;
+            width: 100%;
+            background: rgba(18, 18, 28, 0.7);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            transform: scale(0);
+            transition: 0.5s ease-in-out;
+            transition-delay: 1.2s;
+            border: 1px solid rgba(108, 92, 231, 0.2);
+        }
+
+        .social-list>div {
+            color: var(--white);
+            margin: 0 0.5rem;
+            padding: 0.7rem;
+            cursor: pointer;
+            border-radius: 0.75rem;
+            transform: scale(0);
+            transition: all 0.3s ease;
+        }
+
+        .social-list>div:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        .social-list>div>i {
+            font-size: 1.5rem;
+            transition: 0.3s ease;
+        }
+
+        .social-list>div:hover i {
+            transform: scale(1.2);
+        }
+
+        .facebook-bg {
+            background: linear-gradient(135deg, #3b5998, #2d4373);
+        }
+
+        .google-bg {
+            background: linear-gradient(135deg, #DB4437, #b33a2e);
+        }
+
+        .twitter-bg {
+            background: linear-gradient(135deg, #1DA1F2, #0d8bd9);
+        }
+
+        .insta-bg {
+            background: linear-gradient(135deg, #f09433, #d62976, #962fbf);
+        }
+
+        .pointer {
+            cursor: pointer;
+        }
+
+        .container.sign-in .form.sign-in,
+        .container.sign-in .social-list.sign-in,
+        .container.sign-in .social-list.sign-in>div,
+        .container.sign-up .form.sign-up,
+        .container.sign-up .social-list.sign-up,
+        .container.sign-up .social-list.sign-up>div {
+            transform: scale(1);
+        }
+
+        .content-row {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 6;
+            width: 100%;
+        }
+
+        .text {
+            margin: 4rem;
+            color: var(--white);
+        }
+
+        .text h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 2rem 0;
+            transition: 1s ease-in-out;
+            background: linear-gradient(135deg, #fff, var(--primary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px rgba(108, 92, 231, 0.3);
+        }
+
+        .text p {
+            font-weight: 500;
+            transition: 1s ease-in-out;
+            transition-delay: 0.2s;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .img img {
+            width: 30vw;
+            transition: 1s ease-in-out;
+            transition-delay: 0.4s;
+            filter: drop-shadow(0 0 20px rgba(108, 92, 231, 0.5));
+        }
+
+        .text.sign-in h2,
+        .text.sign-in p,
+        .img.sign-in img {
+            transform: translateX(-250%);
+        }
+
+        .text.sign-up h2,
+        .text.sign-up p,
+        .img.sign-up img {
+            transform: translateX(250%);
+        }
+
+        .container.sign-in .text.sign-in h2,
+        .container.sign-in .text.sign-in p,
+        .container.sign-in .img.sign-in img,
+        .container.sign-up .text.sign-up h2,
+        .container.sign-up .text.sign-up p,
+        .container.sign-up .img.sign-up img {
+            transform: translateX(0);
+        }
+
+        /* BACKGROUND - Dark Gradient Shiny */
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 300vw;
+            transform: translate(35%, 0);
+            background: radial-gradient(ellipse at 30% 40%, #1a1a2e, #0a0a0f);
+            transition: 1s ease-in-out;
+            z-index: 6;
+            box-shadow: none;
+            border-bottom-right-radius: max(50vw, 50vh);
+            border-top-left-radius: max(50vw, 50vh);
+        }
+
+        /* Adding animated gradient overlay for shiny effect */
+        .container::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 300vw;
+            background: linear-gradient(135deg,
+                    rgba(108, 92, 231, 0.15),
+                    rgba(168, 85, 247, 0.1),
+                    rgba(108, 92, 231, 0.05));
+            transform: translate(35%, 0);
+            transition: 1s ease-in-out;
+            z-index: 5;
+            pointer-events: none;
+            border-bottom-right-radius: max(50vw, 50vh);
+            border-top-left-radius: max(50vw, 50vh);
+        }
+
+        .container.sign-in::before,
+        .container.sign-in::after {
+            transform: translate(0, 0);
+            right: 50%;
+        }
+
+        .container.sign-up::before,
+        .container.sign-up::after {
+            transform: translate(100%, 0);
+            right: 50%;
+        }
+
+        /* Floating particles effect for shiny darkness */
+        @keyframes floatGlow {
+            0% {
+                background-position: 0% 0%;
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+
+            100% {
+                background-position: 100% 100%;
+                opacity: 0.3;
+            }
+        }
+
+        /* RESPONSIVE */
+        @media only screen and (max-width: 425px) {
+
+            .container::before,
+            .container::after,
+            .container.sign-in::before,
+            .container.sign-in::after,
+            .container.sign-up::before,
+            .container.sign-up::after {
+                height: 100vh;
+                border-bottom-right-radius: 0;
+                border-top-left-radius: 0;
+                z-index: 0;
+                transform: none;
+                right: 0;
+            }
+
+            .container.sign-in .col.sign-in,
+            .container.sign-up .col.sign-up {
+                transform: translateY(0);
+            }
+
+            .content-row {
+                align-items: flex-start !important;
+            }
+
+            .content-row .col {
+                transform: translateY(0);
+                background-color: unset;
+            }
+
+            .col {
+                width: 100%;
+                position: absolute;
+                padding: 2rem;
+                background: rgba(18, 18, 28, 0.95);
+                backdrop-filter: blur(15px);
+                border-top-left-radius: 2rem;
+                border-top-right-radius: 2rem;
+                transform: translateY(100%);
+                transition: 1s ease-in-out;
+            }
+
+            .row {
+                align-items: flex-end;
+                justify-content: flex-end;
+            }
+
+            .form,
+            .social-list {
+                box-shadow: none;
+                margin: 0;
+                padding: 0;
+                background: transparent;
+                backdrop-filter: none;
+            }
+
+            .text {
+                margin: 0;
+            }
+
+            .text p {
+                display: none;
+            }
+
+            .text h2 {
+                margin: 0.5rem;
+                font-size: 2rem;
+            }
+
+            .input-group input {
+                padding-right: 3rem;
+            }
+
+            .toggle-password-icon {
+                right: 0.8rem;
+            }
+        }
+
+        @media only screen and (max-width: 380px) {
+            .toggle-password-icon {
+                right: 0.6rem;
+            }
+
+            .input-group input {
+                padding-right: 2.8rem;
+            }
+        }
+
+        /* Scrollbar styling for dark theme */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1e1e2e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        .account{
+            font-size: 15px;
+        }
+
+
+    </style>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <div id="container" class="container">
+        <!-- FORM SECTION -->
+        <div class="row">
+            <!-- SIGN UP -->
+            <div class="col align-items-center flex-col sign-up">
+                <div class="form-wrapper align-items-center">
+                    <div class="form sign-up">
+                        <form method="post" action="/register" id="signupForm">
+                            <div class="input-group">
+                                <i class='bx bxs-user'></i>
+                                <input name="username" type="text" placeholder="Username" required>
+                            </div>
+                            <div class="input-group">
+                                <i class='bx bx-mail-send'></i>
+                                <input name="email" type="email" placeholder="Email" required>
+                            </div>
+                            <!-- Password field with toggle -->
+                            <div class="input-group" id="signup-password-group">
+                                <i class='bx bxs-lock-alt'></i>
+                                <input name="password" id="signup-password" type="password" placeholder="Password"
+                                    required>
+                                <i class='bx bx-show-alt toggle-password-icon' id="toggleSignupPassword"></i>
+                            </div>
+                            <!-- Confirm password field with toggle -->
+                            <div class="input-group" id="signup-confirm-group">
+                                <i class='bx bxs-lock-alt'></i>
+                                <input name="confirm_password" id="signup-confirm" type="password"
+                                    placeholder="Confirm password" required>
+                                <i class='bx bx-show-alt toggle-password-icon' id="toggleSignupConfirm"></i>
+                            </div>
+                            <button type="submit">
+                                Sign up
+                            </button>
+                        </form>
+                        <p>
+                            <span class="account">
+                                Already have an account?
+                            </span>
+                            <b onclick="toggle()" class="pointer account">
+                                Sign in here
+                            </b>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- END SIGN UP -->
+
+            <!-- SIGN IN -->
+            <div class="col align-items-center flex-col sign-in">
+                <div class="form-wrapper align-items-center">
+                    <div class="form sign-in">
+                        <form method="post" action="/login" id="signinForm">
+                            <div class="input-group">
+                                <i class='bx bxs-user'></i>
+                                <input name="username" type="text" placeholder="Username" required>
+                            </div>
+                            <!-- Sign in password field with toggle -->
+                            <div class="input-group" id="signin-password-group">
+                                <i class='bx bxs-lock-alt'></i>
+                                <input name="password" id="signin-password" type="password" placeholder="Password"
+                                    required>
+                                <i class='bx bx-show-alt toggle-password-icon' id="toggleSigninPassword"></i>
+                            </div>
+                            <button type="submit">
+                                Sign in
+                            </button>
+                        </form>
+                        <p>
+                            <b>
+                                <!-- Forgot password? -->
+                            </b>
+                        </p>
+                        <p>
+                            <span class="account">
+                                Don't have an account?
+                            </span>
+                            <b onclick="toggle()" class="pointer account">
+                                Sign up here
+                            </b>
+                        </p>
+                    </div>
+                </div>
+                <div class="form-wrapper">
+                    <!-- extra wrapper for spacing -->
+                </div>
+            </div>
+            <!-- END SIGN IN -->
+        </div>
+        <!-- END FORM SECTION -->
+
+        <!-- CONTENT SECTION -->
+        <div class="row content-row">
+            <!-- SIGN IN CONTENT -->
+            <div class="col align-items-center flex-col">
+                <div class="text sign-in">
+                    <h2>
+                        Welcome Back
+                    </h2>
+                </div>
+                <div class="img sign-in">
+                    <!-- optional illustration -->
+                </div>
+            </div>
+            <!-- END SIGN IN CONTENT -->
+            <!-- SIGN UP CONTENT -->
+            <div class="col align-items-center flex-col">
+                <div class="img sign-up">
+                    <!-- optional -->
+                </div>
+                <div class="text sign-up">
+                    <h2>
+                        
+                        Join with us
+                    </h2>
+                </div>
+            </div>
+            <!-- END SIGN UP CONTENT -->
+        </div>
+        <!-- END CONTENT SECTION -->
+    </div>
+
+    <script>
+        let container = document.getElementById('container');
+
+        // Toggle between sign-in and sign-up
+        window.toggle = function () {
+            container.classList.toggle('sign-in');
+            container.classList.toggle('sign-up');
+        };
+
+        // Helper: attach toggle functionality to a given eye icon and its corresponding input field
+        function setupPasswordToggle(eyeIcon, passwordInput) {
+            if (!eyeIcon || !passwordInput) return;
+
+            // Function to update icon based on input type
+            const updateIcon = () => {
+                if (passwordInput.type === 'password') {
+                    eyeIcon.classList.remove('bx-hide');
+                    eyeIcon.classList.add('bx-show-alt');
+                } else {
+                    eyeIcon.classList.remove('bx-show-alt');
+                    eyeIcon.classList.add('bx-hide');
+                }
+            };
+
+            // Toggle password visibility on click
+            eyeIcon.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const currentType = passwordInput.type;
+                if (currentType === 'password') {
+                    passwordInput.type = 'text';
+                } else {
+                    passwordInput.type = 'password';
+                }
+                updateIcon();
+            });
+
+            // Optional: if user changes input field dynamically (not needed), but icon stays consistent
+            // Also ensure that the icon is correct after any external changes? but no external interference.
+            // Initial set
+            updateIcon();
+        }
+
+        // Get all DOM elements
+        const signupPasswordInput = document.getElementById('signup-password');
+        const signupConfirmInput = document.getElementById('signup-confirm');
+        const toggleSignupPassword = document.getElementById('toggleSignupPassword');
+        const toggleSignupConfirm = document.getElementById('toggleSignupConfirm');
+
+        const signinPasswordInput = document.getElementById('signin-password');
+        const toggleSigninPassword = document.getElementById('toggleSigninPassword');
+
+        // Setup toggles for all three password fields
+        if (toggleSignupPassword && signupPasswordInput) {
+            setupPasswordToggle(toggleSignupPassword, signupPasswordInput);
+        }
+        if (toggleSignupConfirm && signupConfirmInput) {
+            setupPasswordToggle(toggleSignupConfirm, signupConfirmInput);
+        }
+        if (toggleSigninPassword && signinPasswordInput) {
+            setupPasswordToggle(toggleSigninPassword, signinPasswordInput);
+        }
+
+        // Additional validation for confirm password on sign-up form
+        const signupForm = document.getElementById('signupForm');
+        if (signupForm) {
+            signupForm.addEventListener('submit', function (event) {
+                const password = signupPasswordInput.value;
+                const confirm = signupConfirmInput.value;
+                if (password !== confirm) {
+                    event.preventDefault();
+                    // Sweet but simple alert to match UI style
+                    alert("Passwords do not match. Please make sure both password fields are identical.");
+                    // Optionally highlight fields
+                    signupConfirmInput.style.border = "0.125rem solid #e74c3c";
+                    signupPasswordInput.style.border = "0.125rem solid #e74c3c";
+                    setTimeout(() => {
+                        signupConfirmInput.style.border = "";
+                        signupPasswordInput.style.border = "";
+                    }, 1500);
+                    return false;
+                }
+                // Also check minimum length for better security? optional
+                if (password.length < 4) {
+                    event.preventDefault();
+                    alert("Password must be at least 4 characters long.");
+                    signupPasswordInput.style.border = "0.125rem solid #e74c3c";
+                    setTimeout(() => {
+                        signupPasswordInput.style.border = "";
+                    }, 1500);
+                    return false;
+                }
+                return true;
+            });
+        }
+
+        // optional: small interaction to clear input border when user starts typing again
+        function addClearBorderOnFocus(inputEl) {
+            if (inputEl) {
+                inputEl.addEventListener('focus', () => {
+                    inputEl.style.border = "";
+                });
+            }
+        }
+        addClearBorderOnFocus(signupPasswordInput);
+        addClearBorderOnFocus(signupConfirmInput);
+
+        // Ensure no overlap with left icons by adjusting padding-right dynamically (already set in css)
+        // Additionally, for any browser inconsistency, we make sure the eye icon doesn't get overlapped:
+        // The .toggle-password-icon has right: 1rem and input padding-right: 3rem (left icon space 3rem total)
+        // On extremely small screens it's fine. Also use event listeners to avoid form submit issues.
+
+        // Set initial class for container animation
+        setTimeout(() => {
+            container.classList.add('sign-in');
+        }, 200);
+
+        // For a more polished feel: if the user clicks on any toggle, the input focus remains intact
+        // Also prevent accidentally submitting form while clicking toggle
+        const allToggles = document.querySelectorAll('.toggle-password-icon');
+        allToggles.forEach(toggle => {
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                // keep focus on the input field after toggle for better UX
+                const parentDiv = toggle.closest('.input-group');
+                if (parentDiv) {
+                    const inputField = parentDiv.querySelector('input');
+                    if (inputField) {
+                        inputField.focus();
+                    }
+                }
+            });
+        });
+
+        // Additional fallback: after toggle, the icon remains correct if type changes via other method? not needed.
+        // This implementation also supports dynamic password managers.
+
+        // RTL or any layout shift resistance: guarantee that the toggle icon is always at right side.
+        // For edge cases, we add a mutation observer to ensure if any new inputs appear? not needed.
+
+        // fine-tune: if confirm password field is empty but user show/hide, nothing breaks.
+        // Also we add support for "sign-in" password toggle and they both work indepently.
+
+        // Ensure that when container switches between sign-in and sign-up, no icon state is lost (already perfect)
+        // Update: also ensure that if any password field gets toggled while having error validation, style remains fine.
+
+        // Reset confirm password mismatch when user edits confirm field
+        if (signupConfirmInput) {
+            signupConfirmInput.addEventListener('input', function () {
+                if (signupPasswordInput.value === signupConfirmInput.value) {
+                    signupConfirmInput.style.border = "";
+                    signupPasswordInput.style.border = "";
+                } else {
+                    // optional border but not forced
+                }
+            });
+            signupPasswordInput.addEventListener('input', function () {
+                if (signupPasswordInput.value === signupConfirmInput.value) {
+                    signupConfirmInput.style.border = "";
+                    signupPasswordInput.style.border = "";
+                }
+            });
+        }
+
+        // Optional: Provide ability to hide/show via eye icon and also improve accessibility (aria labels)
+        const addAriaLabels = () => {
+            const toggleSignupPass = document.getElementById('toggleSignupPassword');
+            const toggleSignupConf = document.getElementById('toggleSignupConfirm');
+            const toggleSignin = document.getElementById('toggleSigninPassword');
+            if (toggleSignupPass) toggleSignupPass.setAttribute('aria-label', 'Show/Hide Password');
+            if (toggleSignupConf) toggleSignupConf.setAttribute('aria-label', 'Show/Hide Confirm Password');
+            if (toggleSignin) toggleSignin.setAttribute('aria-label', 'Show/Hide Password');
+        };
+        addAriaLabels();
+
+        // Ensure the toggle icons are correctly placed after any possible layout change (like responsive adjustments)
+        window.addEventListener('resize', () => {
+            // small no-op: but ensures any dynamic calculation does not break, no issues.
+        });
+
+        // Additional note: left icon and right icon are independent. For passwords, we have both lock icon and eye.
+        // The right padding (3rem) gives enough room for eye icon width ~1.5rem and left margin.
+        // The eye icon won't overlap with text due to explicit padding-right and absolute positioning within parent.
+        // Test: long placeholder text will be truncated but never reaches the eye icon since input has padding-right: 3rem.
+
+        // custom improvement for better visibility: display the toggle pointer as friendly
+        console.log("Password toggle ready — eye icons on right side, won't overlap with text.");
+    </script>
+</body>
+
+</html>
