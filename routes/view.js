@@ -5,6 +5,9 @@ const pool = require('../db');
 router.get('/', async (req, res) => {
     try {
         const [rows] = await pool.query("SELECT * FROM passwords");
+        res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+        res.set('Pragma', 'no-cache');
+        res.set('Expires', '0');
         res.render("view", { passwords: rows });
     }
     catch (err) {
