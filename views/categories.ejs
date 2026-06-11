@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VaultX - Categories</title>
+
+    <link rel="stylesheet" href="/css/categories.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <%- include("partials/navbar") %>
+
+    <div class="container">
+
+        <div class="page-header">
+            <h1>
+                <i class="fa-solid fa-folder-tree"></i>
+                Password Categories
+            </h1>
+            <p>Organize and manage passwords by category.</p>
+        </div>
+
+        <% const categoryMeta = [
+            { key: 'Website', icon: 'fa-solid fa-globe' },
+            { key: 'Application', icon: 'fa-solid fa-mobile-screen' },
+            { key: 'Social Media', icon: 'fa-brands fa-instagram' },
+            { key: 'Banking', icon: 'fa-solid fa-building-columns' },
+            { key: 'Work', icon: 'fa-solid fa-briefcase' },
+            { key: 'Other', icon: 'fa-solid fa-ellipsis' }
+        ]; %>
+
+        <% categoryMeta.forEach(category => { %>
+            <details class="category-card" open>
+                <summary>
+                    <span>
+                        <i class="<%= category.icon %>"></i>
+                        <%= category.key %>
+                    </span>
+                    <span class="item-count"><%= categories[category.key] && categories[category.key].length ? categories[category.key].length : 0 %> items</span>
+                </summary>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                
+                                <th>Platform</th>
+                                <th>Category</th>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Notes</th>
+                                <th>Favorite</th>
+                                <!-- <th>Actions</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (categories[category.key] && categories[category.key].length > 0) {
+                                categories[category.key].forEach((password, index) => { %>
+                                    <tr>
+                                        <td><%= index+1 %></td>
+                                        <!-- <td><%= password.app_name %></td> -->
+                                         <td><%= password.app_name.length > 20 ? password.app_name.substring(0, 17) + '...' : password.app_name %></td>
+                                        <td><%= password.category %></td>
+                                        <td><%= password.username %></td>
+                                        <td>
+                                            <span class="password-text" data-password="<%= password.password %>">********</span>
+                                            <button class="show-btn" type="button"><i class="fa-solid fa-eye"></i></button>
+                                        </td>
+                                        <td><%= password.notes ? password.notes : '-' %></td>
+                                        <td><%= password.favorite ? '⭐' : '-' %></td>
+                                        <!-- <td>
+                                            <a href="/edit/<%= password.id %>" class="icon-btn edit-btn" title="Edit"><i class="fa-solid fa-pen"></i></a>
+                                            <a href="/delete/<%= password.id %>" class="icon-btn delete-btn" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                        </td> -->
+                                    </tr>
+                                <% });
+                            } else { %>
+                                <tr class="empty-row">
+                                    <td colspan="8">No passwords found in this category.</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </details>
+        <% }); %>
+
+    </div>
+
+    <script>
+        document.querySelectorAll('.show-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const span = button.parentElement.querySelector('.password-text');
+                const isHidden = span.innerText === '********';
+                span.innerText = isHidden ? span.dataset.password : '********';
+                button.innerHTML = isHidden ? '<i class="fa-solid fa-eye-slash"></i>' : '<i class="fa-solid fa-eye"></i>';
+            });
+        });
+    </script>
+</body>
+</html>
