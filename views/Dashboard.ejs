@@ -1,20 +1,518 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+
+    <title>VaultX - Dashboard</title>
+
 
     <link rel="stylesheet" href="/css/navbar.css">
 
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
 </head>
+
+
 <body>
+
 
     <%- include("partials/navbar") %>
 
-    <h1>Welcome, <%= username || 'User' %>!</h1>
+
+
+        <div class="dashboard-container">
+
+
+            <!-- Welcome Section -->
+
+
+            <div class="welcome-card">
+
+
+                <div>
+
+                    <h1>
+                        Welcome, <%= username || "User" %> 👋
+                    </h1>
+
+
+                    <p>
+                        Manage your passwords securely with vaultX.
+                    </p>
+
+
+                </div>
+
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+
+            </div>
+
+
+
+
+
+            <!-- Statistics Cards -->
+
+
+            <div class="stats">
+
+
+                <div class="card">
+
+
+                    <div class="icon blue">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>Total Passwords</h3>
+
+                        <h2>
+                            <%= totalPasswords || 0 %>
+                        </h2>
+
+                    </div>
+
+
+                </div>
+
+
+
+
+
+                <div class="card">
+
+
+                    <div class="icon yellow">
+
+                        <i class="fa-solid fa-star"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>Favorites</h3>
+
+                        <h2>
+                            <%= favoritePasswords || 0 %>
+                        </h2>
+
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+
+                <div class="card">
+
+
+                    <div class="icon purple">
+
+                        <i class="fa-solid fa-folder"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>Categories</h3>
+
+                        <h2>
+                            6
+                        </h2>
+
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+
+                <div class="card">
+
+
+                    <div class="icon green">
+
+                        <i class="fa-solid fa-shield"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>Security Score</h3>
+
+                        <h2>
+                            85%
+                        </h2>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+
+
+            <div class="main-grid">
+
+
+
+                <!-- Recent Password -->
+
+
+                <div class="box">
+
+
+                    <h2>
+
+                        <i class="fa-solid fa-clock"></i>
+
+                        Recent Passwords
+
+                    </h2>
+
+
+
+
+                    <table>
+
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Name</th>
+
+                                <th>Category</th>
+
+                                <th>Username</th>
+
+                            </tr>
+
+                        </thead>
+
+
+
+                        <tbody>
+
+
+
+                            <% if(recent && recent.length> 0){ %>
+
+
+                                <% recent.forEach(password=>{ %>
+
+
+                                    <tr>
+
+
+                                        <td>
+
+                                            <i class="fa-solid fa-key"></i>
+
+                                            <%= password.app_name %>
+
+                                        </td>
+
+
+                                        <td>
+
+                                            <%= password.category %>
+
+                                        </td>
+
+
+                                        <td>
+
+                                            <%= password.username %>
+
+                                        </td>
+
+
+                                    </tr>
+
+
+                                    <% }) %>
+
+
+                                        <% }else{ %>
+
+
+                                            <tr>
+
+                                                <td colspan="3">
+
+                                                    No Password Added
+
+                                                </td>
+
+
+                                            </tr>
+
+
+                                            <% } %>
+
+
+
+                        </tbody>
+
+
+                    </table>
+
+
+                </div>
+
+
+
+
+
+
+
+
+                <!-- Security -->
+
+
+                <div class="box security-box">
+
+
+                    <h2>
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        Password Health
+
+                    </h2>
+
+
+
+
+                    <div class="progress">
+
+
+                        <div class="progress-fill">
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <h1>
+                        85%
+                    </h1>
+
+
+                    <p>
+                        Your vault security is strong.
+                    </p>
+
+
+
+                    <a href="/security">
+
+                        Check Security
+
+                    </a>
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+            <!-- Category Section -->
+
+
+            <div class="box categories">
+
+
+                <h2>
+
+                    <i class="fa-solid fa-layer-group"></i>
+
+                    Categories
+
+                </h2>
+
+
+
+
+                <div class="category-grid">
+
+
+                    <div>
+
+                        🌐 Website
+
+                        <span><i class="fa-solid fa-bars-progress"></i></span>
+
+                    </div>
+
+
+
+                    <div>
+
+                        📱 Application
+
+                        <span><i class="fa-solid fa-bars-progress"></i></span>
+
+                    </div>
+
+
+
+                    <div>
+
+                        📸 Social Media
+
+                        <span><i class="fa-solid fa-bars-progress"></i></span>
+
+                    </div>
+
+
+
+
+                    <div>
+
+                        🏦 Banking
+
+                        <span><i class="fa-solid fa-bars-progress"></i></span>
+
+                    </div>
+
+
+
+
+                    <div>
+
+                        💼 Work
+
+                        <span><i class="fa-solid fa-bars-progress"></i></span>
+
+                    </div>
+
+
+
+
+                    <div>
+
+                        📁 Other
+
+                        <span><i class="fa-solid fa-bars-progress"></i></span>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+            <!-- Quick Actions -->
+
+
+            <div class="quick-actions">
+
+
+                <a href="/add">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Add Password
+
+                </a>
+
+
+
+                <a href="/generate">
+
+                    <i class="fa-solid fa-key"></i>
+
+                    Generate Password
+
+                </a>
+
+
+
+
+                <a href="/favorite">
+
+                    <i class="fa-solid fa-star"></i>
+
+                    Favorites
+
+                </a>
+
+
+
+                <a href="/security">
+
+                    <i class="fa-solid fa-shield"></i>
+
+                    Security
+
+                </a>
+
+
+            </div>
+
+
+
+
+
+        </div>
+
+
+
 
 </body>
+
 </html>

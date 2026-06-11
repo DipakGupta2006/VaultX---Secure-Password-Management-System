@@ -19,6 +19,8 @@ app.use(session({
 }));
 app.set("view engine", "ejs");
 
+
+const dashboard = require("./routes/dashboard"); 
 const add = require("./routes/add");
 const view = require("./routes/view");
 const generate = require("./routes/generate");
@@ -86,22 +88,56 @@ app.post("/login", async (req, res) => {
     }
 });
 
-app.get("/dashboard", (req, res) => {
-    if (!req.session || !req.session.username) {
-        return res.redirect("/");
-    }
+// Logout route - destroys session and clears session cookie
+app.get('/logout', (req, res) => {
+    try {
+        // destroy session
+        req.session.destroy((err) => {
+            if (err) {
+                console.error('Session destroy error:', err);
+                return res.status(500).send('Error while logging out.');
+            }
 
-    res.render("Dashboard", { username: req.session.username.toUpperCase() });
+            // clear the cookie set by express-session
+            res.clearCookie('connect.sid', { path: '/' });
+
+            // redirect to home/login page
+            return res.redirect('/');
+        });
+    } catch (err) {
+        console.error('Logout error:', err);
+        return res.status(500).send('Error while logging out.');
+    }
 });
 
-app.use('/add', add);
-app.use('/view', view);
-app.use('/generate', generate);
-app.use('/favorite', favorite);
-app.use('/categories', categories);
-app.use('/deletes', deletes);
-app.use('/update', update);
-app.use('/security', security);
+// app.get("/dashboard", (req, res) => {
+//     if (!req.session || !req.session.username) {
+//         return res.redirect("/");
+//     }
+
+//     res.render("Dashboard", { username: req.session.username.toUpperCase() });
+// });
+
+// Authentication middleware: allow only logged-in users
+function requireLogin(req, res, next) {
+    if (req.session && req.session.username) {
+        return next();
+    }
+    return res.redirect('/');
+}
+
+
+
+
+app.use('/dashboard', requireLogin, dashboard);
+app.use('/add', requireLogin, add);
+app.use('/view', requireLogin, view);
+app.use('/generate', requireLogin, generate);
+app.use('/favorite', requireLogin, favorite);
+app.use('/categories', requireLogin, categories);
+app.use('/deletes', requireLogin, deletes);
+app.use('/update', requireLogin, update);
+app.use('/security', requireLogin, security);
 
 
 app.listen(port, () => {
