@@ -5,8 +5,9 @@ const pool = mysql.createPool({
   user: process.env.DB_USER, 
   password: process.env.DB_PASSWORD, 
   database: process.env.DB_NAME, 
+  port: 19406, // <-- Yeh line sabse zaroori hai Aiven ke liye!
   waitForConnections: true, 
-  connectionLimit: 10, // <-- Yahan comma lagana zaroori tha
+  connectionLimit: 10, 
   ssl: { rejectUnauthorized: false }
 });
 
