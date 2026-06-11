@@ -24,7 +24,8 @@ const view = require("./routes/view");
 const generate = require("./routes/generate");
 const favorite = require("./routes/favorite");
 const categories = require("./routes/categories");
-const deletes = require("./routes/deletes")
+const deletes = require("./routes/deletes");
+const update = require("./routes/update")
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
@@ -98,6 +99,7 @@ app.use('/generate', generate);
 app.use('/favorite', favorite);
 app.use('/categories', categories);
 app.use('/deletes', deletes);
+app.use('/update', update);
 
 
 

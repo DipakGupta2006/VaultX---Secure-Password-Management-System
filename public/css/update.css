@@ -1,0 +1,380 @@
+* {
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+
+}
+
+
+body {
+
+    background: #f5f6fa;
+
+}
+
+
+
+.container {
+
+    width: 95%;
+    max-width: 1400px;
+
+    margin: 30px auto;
+
+}
+
+
+
+
+.header h1 {
+
+    color: #333;
+
+}
+
+
+
+.header i {
+
+    color: #6C4DF6;
+
+}
+
+
+
+
+
+.table-container,
+.form-container {
+
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    margin-top: 25px;
+
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, .08);
+
+
+}
+
+
+
+
+h2 {
+
+    margin-bottom: 20px;
+
+    color: #333;
+
+}
+
+
+h2 i {
+
+    padding-top: 1.5rem;
+}
+
+
+
+
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    overflow: hidden;
+
+}
+
+
+
+thead {
+
+    background: #6C4DF6;
+
+    color: white;
+
+}
+
+
+
+th,
+td {
+
+    padding: 14px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #eee;
+
+}
+
+
+
+tbody tr:hover {
+
+    background: #faf8ff;
+
+}
+
+
+
+
+.form-container {
+
+    max-width: 700px;
+
+}
+
+
+
+
+.form-group {
+
+    margin-bottom: 18px;
+
+}
+
+
+
+label {
+
+    font-weight: 600;
+
+    display: block;
+
+    margin-bottom: 8px;
+
+}
+
+
+
+
+input,
+select,
+textarea {
+
+
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-size: 15px;
+
+
+}
+
+
+
+input:focus,
+select:focus,
+textarea:focus {
+
+    border-color: #6C4DF6;
+
+}
+
+
+
+
+
+.password-box {
+
+    position: relative;
+
+}
+
+
+
+.password-box i {
+
+    position: absolute;
+
+    right: 15px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    cursor: pointer;
+
+    color: #666;
+
+}
+
+
+
+
+.checkbox-group {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 15px 0;
+
+}
+
+
+
+.checkbox-group input {
+
+    width: auto;
+
+}
+
+
+
+
+.update-btn {
+
+
+    width: 100%;
+
+    padding: 14px;
+
+    background: #6C4DF6;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+
+}
+
+
+
+.update-btn:hover {
+
+    background: #5435e8;
+
+}
+
+
+
+
+
+@media(max-width:768px) {
+
+
+    .container {
+
+        width: 98%;
+
+    }
+
+
+    .table-container {
+
+        overflow-x: auto;
+
+    }
+
+
+    table {
+
+        min-width: 900px;
+
+    }
+
+
+    .form-container {
+
+        width: 100%;
+
+    }
+
+
+
+}
+
+
+.table-password-box{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+}
+
+
+
+.table-show-btn{
+
+
+border:none;
+
+background:#6C4DF6;
+
+color:white;
+
+width:35px;
+
+height:30px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+
+}
+
+
+
+.generate-btn{
+
+
+margin-top:10px;
+
+padding:12px 20px;
+
+background:#222;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+font-size:15px;
+
+
+}
+
+
+
+.generate-btn:hover{
+
+background:#6C4DF6;
+
+}

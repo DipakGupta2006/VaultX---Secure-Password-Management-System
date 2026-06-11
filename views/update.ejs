@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VaultX - Update Password</title>
+
+
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/update.css">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+    <%- include("partials/navbar") %>
+
+
+
+        <div class="container">
+
+
+            <!-- Header -->
+
+
+            <div class="header">
+
+
+                <h1>
+
+                    <i class="fa-solid fa-pen-to-square"></i>
+
+                    Update Password
+
+                </h1>
+
+
+            </div>
+
+
+
+            <!-- Existing Password Table -->
+
+
+            <div class="table-container">
+
+
+                <!-- <h2>
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    Saved Passwords
+
+                </h2> -->
+
+
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>App/Web Name</th>
+                            <th>Category</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th>Notes</th>
+                            <th>Favorite</th>
+
+
+                        </tr>
+
+
+                    </thead>
+
+
+
+                    <tbody>
+
+
+                        <% passwords.forEach(password=>{ %>
+
+
+                            <tr>
+
+
+                                <td>
+                                    <%= password.id %>
+                                </td>
+
+
+                                <td>
+                                    <%= password.app_name %>
+                                </td>
+
+
+                                <td>
+                                    <%= password.category %>
+                                </td>
+
+
+                                <td>
+                                    <%= password.username %>
+                                </td>
+
+
+                                <td>
+
+                                    <div class="table-password-box">
+
+                                        <span class="table-password" data-password="<%= password.password %>">
+
+                                            ********
+
+                                        </span>
+
+
+                                        <button type="button" class="table-show-btn">
+
+                                            <i class="fa-solid fa-eye"></i>
+
+                                        </button>
+
+
+                                    </div>
+
+
+                                </td>
+
+
+                                <td>
+
+                                    <%= password.notes || "-" %>
+
+                                </td>
+
+
+                                <td>
+
+                                    <%= password.favorite ? "⭐" : "-" %>
+
+                                </td>
+
+
+
+                            </tr>
+
+
+                            <% }) %>
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+
+
+
+            <!-- Update Form -->
+
+
+            <div class="form-container">
+
+
+                <h2>
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                    Update Password Details
+
+                </h2>
+
+
+
+
+                <form action="/update/update-password" method="POST">
+
+
+
+                    <div class="form-group">
+
+                        <label>Password ID</label>
+
+                        <input type="number" name="id" placeholder="Enter Password ID" required>
+
+                    </div>
+
+
+
+
+
+                    <div class="form-group">
+
+                        <label>Application / Website Name</label>
+
+                        <input type="text" name="app_name" placeholder="Github, Gmail..." required>
+
+                    </div>
+
+
+
+
+
+
+                    <div class="form-group">
+
+                        <label>Category</label>
+
+
+                        <select name="category">
+
+
+                            <option value="Website">
+                                Website
+                            </option>
+
+
+                            <option value="Application">
+                                Application
+                            </option>
+
+
+                            <option value="Social_Media">
+                                Social Media
+                            </option>
+
+
+                            <option value="Banking">
+                                Banking
+                            </option>
+
+
+                            <option value="Work">
+                                Work
+                            </option>
+
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+
+
+
+
+                    <div class="form-group">
+
+
+                        <label>Username / Email</label>
+
+
+                        <input type="text" name="username" placeholder="Enter username" required>
+
+
+                    </div>
+
+
+
+
+
+
+                    <div class="form-group">
+
+
+                        <label>Password</label>
+
+
+                        <div class="password-box">
+
+
+                            <input type="password" id="password" name="password" placeholder="Enter password" required>
+
+
+                            <i class="fa-solid fa-eye" id="togglePassword">
+                            </i>
+
+
+                        </div>
+
+
+                        <button type="button" id="generateBtn" class="generate-btn">
+
+                            <i class="fa-solid fa-key"></i>
+
+                            Generate Password
+
+                        </button>
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class="form-group">
+
+
+                        <label>Notes</label>
+
+
+                        <textarea name="notes" rows="4" placeholder="Add notes">
+
+                </textarea>
+
+
+                    </div>
+
+
+
+
+
+
+                    <div class="checkbox-group">
+
+
+                        <input type="checkbox" name="favorite" id="favorite">
+
+
+                        <label for="favorite">
+
+                            Mark as Favorite ⭐
+
+                        </label>
+
+
+                    </div>
+
+
+
+
+
+
+                    <button class="update-btn">
+
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Update Password
+
+
+                    </button>
+
+
+
+
+                </form>
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+        <script>
+
+
+            const togglePassword =
+                document.getElementById("togglePassword");
+
+
+            const password =
+                document.getElementById("password");
+
+
+
+            togglePassword.onclick = () => {
+
+
+                if (password.type === "password") {
+
+
+                    password.type = "text";
+
+
+                    togglePassword.classList.remove(
+                        "fa-eye"
+                    );
+
+
+                    togglePassword.classList.add(
+                        "fa-eye-slash"
+                    );
+
+
+                }
+
+                else {
+
+
+                    password.type = "password";
+
+
+                    togglePassword.classList.remove(
+                        "fa-eye-slash"
+                    );
+
+
+                    togglePassword.classList.add(
+                        "fa-eye"
+                    );
+
+
+                }
+
+
+            }
+            // Table Password Show Hide
+
+
+            const tableButtons = document.querySelectorAll(".table-show-btn");
+
+
+            tableButtons.forEach(button => {
+
+
+                button.addEventListener("click", () => {
+
+
+                    const passwordText =
+                        button.parentElement.querySelector(".table-password");
+
+
+                    if (passwordText.innerText === "********") {
+
+
+                        passwordText.innerText =
+                            passwordText.dataset.password;
+
+
+                        button.innerHTML =
+                            '<i class="fa-solid fa-eye-slash"></i>';
+
+
+                    }
+
+                    else {
+
+
+                        passwordText.innerText = "********";
+
+
+                        button.innerHTML =
+                            '<i class="fa-solid fa-eye"></i>';
+
+
+                    }
+
+
+
+                });
+
+
+            });
+
+
+
+
+
+
+            // Generate Password
+
+
+            const generateBtn =
+                document.getElementById("generateBtn");
+
+
+            const passwordInput =
+                document.getElementById("password");
+
+
+
+            generateBtn.addEventListener("click", () => {
+
+
+                const chars =
+                    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+
+
+                let password = "";
+
+
+                for (let i = 0; i < 14; i++) {
+
+
+                    password += chars.charAt(
+                        Math.floor(Math.random() * chars.length)
+                    );
+
+
+                }
+
+
+                passwordInput.value = password;
+
+
+            });
+
+
+        </script>
+
+
+
+</body>
+
+</html>
