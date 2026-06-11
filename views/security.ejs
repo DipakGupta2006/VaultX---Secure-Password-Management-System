@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VaultX - Password Security</title>
+
+
+    <link rel="stylesheet" href="/css/navbar.css">
+
+    <link rel="stylesheet" href="/css/security.css">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+    <%- include("partials/navbar") %>
+
+
+
+        <div class="container">
+
+
+            <div class="header">
+
+                <h1>
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    Password Strength Checker
+
+                </h1>
+
+            </div>
+
+
+
+
+
+            <div class="strength-card">
+
+
+                <h2>
+
+                    <i class="fa-solid fa-key"></i>
+
+                    Analyze Your Password
+
+                </h2>
+
+
+
+
+
+                <div class="password-box">
+
+
+                    <input type="password" id="password" placeholder="Enter your password">
+
+
+
+                    <i class="fa-solid fa-eye" id="togglePassword">
+
+                    </i>
+
+
+                </div>
+
+
+
+
+
+                <div class="strength-bar">
+
+
+                    <div id="progress"></div>
+
+
+                </div>
+
+
+
+
+                <h3 id="strengthText">
+
+                    Password Strength
+
+                </h3>
+
+
+
+
+
+                <div class="checks">
+
+
+
+                    <p id="length">
+
+                        <i class="fa-solid fa-circle-xmark"></i>
+
+                        Minimum 8 characters
+
+                    </p>
+
+
+
+
+
+                    <p id="uppercase">
+
+                        <i class="fa-solid fa-circle-xmark"></i>
+
+                        Contains uppercase letter
+
+                    </p>
+
+
+
+
+
+                    <p id="lowercase">
+
+                        <i class="fa-solid fa-circle-xmark"></i>
+
+                        Contains lowercase letter
+
+                    </p>
+
+
+
+
+
+                    <p id="number">
+
+                        <i class="fa-solid fa-circle-xmark"></i>
+
+                        Contains number
+
+                    </p>
+
+
+
+
+
+                    <p id="specialCount">
+
+                        <i class="fa-solid fa-circle-xmark"></i>
+
+                        Minimum 5 special characters
+
+                    </p>
+
+
+
+
+
+                    <p id="space">
+
+                        <i class="fa-solid fa-circle-xmark"></i>
+
+                        No spaces allowed
+
+                    </p>
+
+
+
+                </div>
+
+
+
+
+
+                <div class="suggestion">
+
+
+                    <i class="fa-solid fa-lightbulb"></i>
+
+
+                    <span id="suggestionText">
+
+                        Enter password to check security
+
+                    </span>
+
+
+                </div>
+
+
+
+
+
+                <button id="copyBtn" class="copy-btn">
+
+
+                    <i class="fa-solid fa-copy"></i>
+
+                    Copy Password
+
+
+                </button>
+
+
+
+                <p id="copyMsg"></p>
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+        <script>
+
+
+            const password =
+                document.getElementById("password");
+
+
+            const progress =
+                document.getElementById("progress");
+
+
+            const strengthText =
+                document.getElementById("strengthText");
+
+
+
+
+
+            password.addEventListener(
+                "input",
+                checkPassword
+            );
+
+
+
+
+
+            function checkPassword() {
+
+
+                let value = password.value;
+
+
+                let score = 0;
+
+
+
+
+
+                // Length
+
+
+                if (value.length >= 8) {
+
+                    score++;
+
+                    success("length");
+
+                }
+
+                else {
+
+                    fail("length");
+
+                }
+
+
+
+
+
+
+                // Uppercase
+
+
+                if (/[A-Z]/.test(value)) {
+
+
+                    score++;
+
+                    success("uppercase");
+
+
+                }
+
+                else {
+
+                    fail("uppercase");
+
+                }
+
+
+
+
+
+
+
+                // Lowercase
+
+
+                if (/[a-z]/.test(value)) {
+
+
+                    score++;
+
+                    success("lowercase");
+
+
+                }
+
+                else {
+
+                    fail("lowercase");
+
+                }
+
+
+
+
+
+
+
+                // Number
+
+
+                if (/[0-9]/.test(value)) {
+
+
+                    score++;
+
+                    success("number");
+
+
+                }
+
+                else {
+
+                    fail("number");
+
+                }
+
+
+
+
+
+
+
+
+                // Special Characters
+
+
+                let special =
+                    value.match(/[!@#$%^&*]/g);
+
+
+
+                if (special && special.length >= 5) {
+
+
+                    score++;
+
+                    success("specialCount");
+
+
+                }
+
+                else {
+
+                    fail("specialCount");
+
+                }
+
+
+
+
+
+
+
+
+                // Space
+
+
+                if (value.length > 0 && !/\s/.test(value)) {
+
+
+                    score++;
+
+                    success("space");
+
+
+                }
+
+                else {
+
+
+                    fail("space");
+
+
+                }
+
+
+
+
+
+
+
+                // Common Password
+
+
+                let common = [
+
+                    "password",
+                    "123456",
+                    "qwerty",
+                    "admin"
+
+                ];
+
+
+
+                if (common.includes(value.toLowerCase())) {
+
+
+                    strengthText.innerHTML =
+                        "Common Password ❌";
+
+
+                    progress.style.width = "10%";
+
+                    progress.style.background = "#ff4d4d";
+
+
+                    copyBtn.style.display = "none";
+
+
+                    return;
+
+
+                }
+
+
+
+
+
+
+
+                let percentage =
+                    (score / 6) * 100;
+
+
+
+                progress.style.width =
+                    percentage + "%";
+
+
+
+
+
+
+
+                if (score <= 2) {
+
+
+                    strengthText.innerHTML =
+                        "Weak Password ❌";
+
+
+                    progress.style.background =
+                        "#ff4d4d";
+
+
+                    copyBtn.style.display = "none";
+
+
+                }
+
+
+
+                else if (score <= 5) {
+
+
+                    strengthText.innerHTML =
+                        "Medium Password ⚠️";
+
+
+                    progress.style.background =
+                        "#ffa500";
+
+
+                    copyBtn.style.display = "none";
+
+
+                }
+
+
+
+                else {
+
+
+                    strengthText.innerHTML =
+                        "Strong Password 🔥";
+
+
+                    progress.style.background =
+                        "#2ecc71";
+
+
+                    copyBtn.style.display = "block";
+
+
+                }
+
+
+
+            }
+
+
+
+
+
+
+
+            function success(id) {
+
+
+                let element =
+                    document.getElementById(id);
+
+
+
+                element.style.color = "#2ecc71";
+
+
+
+                element.querySelector("i").className =
+                    "fa-solid fa-circle-check";
+
+
+            }
+
+
+
+
+
+            function fail(id) {
+
+
+                let element =
+                    document.getElementById(id);
+
+
+
+                element.style.color = "#555";
+
+
+
+                element.querySelector("i").className =
+                    "fa-solid fa-circle-xmark";
+
+
+            }
+
+
+
+
+
+
+
+            // Show Hide Password
+
+
+            const toggle =
+                document.getElementById("togglePassword");
+
+
+
+            toggle.onclick = () => {
+
+
+                if (password.type === "password") {
+
+
+                    password.type = "text";
+
+
+                    toggle.classList.replace(
+                        "fa-eye",
+                        "fa-eye-slash"
+                    );
+
+
+                }
+
+                else {
+
+
+                    password.type = "password";
+
+
+                    toggle.classList.replace(
+                        "fa-eye-slash",
+                        "fa-eye"
+                    );
+
+
+                }
+
+
+            }
+
+
+
+
+
+
+
+
+            // Copy Password
+
+
+            const copyBtn =
+                document.getElementById("copyBtn");
+
+
+            const copyMsg =
+                document.getElementById("copyMsg");
+
+
+
+            copyBtn.style.display = "none";
+
+
+
+            copyBtn.onclick = () => {
+
+
+                navigator.clipboard.writeText(
+                    password.value
+                );
+
+
+
+                copyMsg.innerHTML =
+                    "Password copied successfully ✅";
+
+
+
+                setTimeout(() => {
+
+
+                    copyMsg.innerHTML = "";
+
+
+                }, 2000);
+
+
+
+            }
+
+
+
+
+        </script>
+
+
+
+</body>
+
+</html>

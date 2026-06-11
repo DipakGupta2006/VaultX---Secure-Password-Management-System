@@ -1,0 +1,356 @@
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+    font-family: "Segoe UI", sans-serif;
+
+}
+
+
+
+body {
+
+    background: #f5f6fa;
+
+}
+
+
+
+
+.container {
+
+    padding: 40px;
+
+}
+
+
+
+
+
+.header h1 {
+
+
+    font-size: 32px;
+
+    color: #222;
+
+}
+
+
+
+
+
+.strength-card {
+
+
+    width: 520px;
+
+    max-width: 100%;
+
+
+    background: white;
+
+
+    margin: 30px auto;
+
+
+    padding: 35px;
+
+
+    border-radius: 20px;
+
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.08);
+
+
+}
+
+
+
+
+
+.strength-card h2 {
+
+
+    color: #6C4DF6;
+
+    margin-bottom: 25px;
+
+
+}
+
+
+
+
+.password-box {
+
+
+    position: relative;
+
+}
+
+
+
+
+
+.password-box input {
+
+
+    width: 100%;
+
+
+    padding: 15px 45px 15px 15px;
+
+
+    border: 1px solid #ddd;
+
+
+    border-radius: 12px;
+
+
+    font-size: 16px;
+
+
+    outline: none;
+
+
+}
+
+
+
+
+
+
+.password-box i {
+
+
+    position: absolute;
+
+
+    right: 15px;
+
+
+    top: 50%;
+
+
+    transform: translateY(-50%);
+
+
+    cursor: pointer;
+
+
+    color: #777;
+
+
+}
+
+
+
+
+
+.strength-bar {
+
+
+    height: 12px;
+
+
+    background: #ddd;
+
+
+    border-radius: 20px;
+
+
+    margin-top: 25px;
+
+
+    overflow: hidden;
+
+
+}
+
+
+
+
+
+#progress {
+
+
+    height: 100%;
+
+
+    width: 0%;
+
+
+    transition: .4s;
+
+
+}
+
+
+
+
+
+
+
+#strengthText {
+
+
+    text-align: center;
+
+
+    margin: 20px 0;
+
+
+}
+
+
+
+
+
+.checks p {
+
+
+    margin: 15px 0;
+
+
+    font-size: 16px;
+
+
+}
+
+
+
+.checks i {
+
+
+    margin-right: 10px;
+
+
+}
+
+
+
+
+
+
+.suggestion {
+
+
+    margin-top: 25px;
+
+
+    padding: 15px;
+
+
+    background: #f1efff;
+
+
+    border-radius: 12px;
+
+
+    color: #6C4DF6;
+
+
+}
+
+
+
+
+
+.copy-btn {
+
+
+    margin-top: 20px;
+
+
+    padding: 12px 25px;
+
+
+    border: none;
+
+
+    border-radius: 12px;
+
+
+    background: #6C4DF6;
+
+
+    color: white;
+
+
+    font-size: 16px;
+
+
+    cursor: pointer;
+
+
+}
+
+
+
+
+.copy-btn:hover {
+
+
+    background: #5435d8;
+
+
+}
+
+
+
+
+
+#copyMsg {
+
+
+    margin-top: 15px;
+
+
+    color: #2ecc71;
+
+
+    font-weight: 600;
+
+
+}
+
+
+
+
+
+@media(max-width:600px) {
+
+
+
+    .container {
+
+        padding: 20px;
+
+    }
+
+
+
+
+    .header h1 {
+
+        font-size: 24px;
+
+    }
+
+
+
+    .strength-card {
+
+
+        padding: 25px;
+
+    }
+
+
+}
