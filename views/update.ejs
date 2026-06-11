@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/update.css">
 
+    <link rel="stylesheet" href="/css/footer.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -379,87 +380,39 @@
         </div>
 
 
+        <%- include("partials/footer") %>
 
 
 
-        <script>
+            <script>
 
 
-            const togglePassword =
-                document.getElementById("togglePassword");
+                const togglePassword =
+                    document.getElementById("togglePassword");
 
 
-            const password =
-                document.getElementById("password");
+                const password =
+                    document.getElementById("password");
 
 
 
-            togglePassword.onclick = () => {
+                togglePassword.onclick = () => {
 
 
-                if (password.type === "password") {
+                    if (password.type === "password") {
 
 
-                    password.type = "text";
+                        password.type = "text";
 
 
-                    togglePassword.classList.remove(
-                        "fa-eye"
-                    );
+                        togglePassword.classList.remove(
+                            "fa-eye"
+                        );
 
 
-                    togglePassword.classList.add(
-                        "fa-eye-slash"
-                    );
-
-
-                }
-
-                else {
-
-
-                    password.type = "password";
-
-
-                    togglePassword.classList.remove(
-                        "fa-eye-slash"
-                    );
-
-
-                    togglePassword.classList.add(
-                        "fa-eye"
-                    );
-
-
-                }
-
-
-            }
-            // Table Password Show Hide
-
-
-            const tableButtons = document.querySelectorAll(".table-show-btn");
-
-
-            tableButtons.forEach(button => {
-
-
-                button.addEventListener("click", () => {
-
-
-                    const passwordText =
-                        button.parentElement.querySelector(".table-password");
-
-
-                    if (passwordText.innerText === "********") {
-
-
-                        passwordText.innerText =
-                            passwordText.dataset.password;
-
-
-                        button.innerHTML =
-                            '<i class="fa-solid fa-eye-slash"></i>';
+                        togglePassword.classList.add(
+                            "fa-eye-slash"
+                        );
 
 
                     }
@@ -467,67 +420,116 @@
                     else {
 
 
-                        passwordText.innerText = "********";
+                        password.type = "password";
 
 
-                        button.innerHTML =
-                            '<i class="fa-solid fa-eye"></i>';
+                        togglePassword.classList.remove(
+                            "fa-eye-slash"
+                        );
+
+
+                        togglePassword.classList.add(
+                            "fa-eye"
+                        );
 
 
                     }
 
 
+                }
+                // Table Password Show Hide
+
+
+                const tableButtons = document.querySelectorAll(".table-show-btn");
+
+
+                tableButtons.forEach(button => {
+
+
+                    button.addEventListener("click", () => {
+
+
+                        const passwordText =
+                            button.parentElement.querySelector(".table-password");
+
+
+                        if (passwordText.innerText === "********") {
+
+
+                            passwordText.innerText =
+                                passwordText.dataset.password;
+
+
+                            button.innerHTML =
+                                '<i class="fa-solid fa-eye-slash"></i>';
+
+
+                        }
+
+                        else {
+
+
+                            passwordText.innerText = "********";
+
+
+                            button.innerHTML =
+                                '<i class="fa-solid fa-eye"></i>';
+
+
+                        }
+
+
+
+                    });
+
 
                 });
 
 
-            });
 
 
 
 
+                // Generate Password
 
 
-            // Generate Password
+                const generateBtn =
+                    document.getElementById("generateBtn");
 
 
-            const generateBtn =
-                document.getElementById("generateBtn");
-
-
-            const passwordInput =
-                document.getElementById("password");
+                const passwordInput =
+                    document.getElementById("password");
 
 
 
-            generateBtn.addEventListener("click", () => {
+                generateBtn.addEventListener("click", () => {
 
 
-                const chars =
-                    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+                    const chars =
+                        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
 
 
-                let password = "";
+                    let password = "";
 
 
-                for (let i = 0; i < 14; i++) {
+                    for (let i = 0; i < 14; i++) {
 
 
-                    password += chars.charAt(
-                        Math.floor(Math.random() * chars.length)
-                    );
+                        password += chars.charAt(
+                            Math.floor(Math.random() * chars.length)
+                        );
 
 
-                }
+                    }
 
 
-                passwordInput.value = password;
+                    passwordInput.value = password;
 
 
-            });
+                });
 
 
-        </script>
+            </script>
 
 
 

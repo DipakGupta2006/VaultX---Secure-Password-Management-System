@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/deletes.css">
+    <link rel="stylesheet" href="/css/footer.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -27,7 +28,7 @@
 
                 <a href="/add" class="add-btn">
                     <i class="fa-solid fa-plus"></i>
-                     Add Passwords
+                    Add Passwords
                 </a>
 
             </div>
@@ -175,55 +176,57 @@
 
         </div>
 
+        <%- include("partials/footer") %>
 
-        <script>
 
-            const buttons =
-                document.querySelectorAll(".show-btn");
+            <script>
 
-            buttons.forEach(button => {
+                const buttons =
+                    document.querySelectorAll(".show-btn");
 
-                button.addEventListener("click", () => {
+                buttons.forEach(button => {
 
-                    const span =
-                        button.parentElement.querySelector(".password-text");
+                    button.addEventListener("click", () => {
 
-                    if (span.innerText === "********") {
+                        const span =
+                            button.parentElement.querySelector(".password-text");
 
-                        span.innerText =
-                            span.dataset.password;
+                        if (span.innerText === "********") {
 
-                        button.innerHTML =
-                            '<i class="fa-solid fa-eye-slash"></i>';
+                            span.innerText =
+                                span.dataset.password;
 
-                    }
-                    else {
+                            button.innerHTML =
+                                '<i class="fa-solid fa-eye-slash"></i>';
 
-                        span.innerText = "********";
+                        }
+                        else {
 
-                        button.innerHTML =
-                            '<i class="fa-solid fa-eye"></i>';
+                            span.innerText = "********";
 
-                    }
+                            button.innerHTML =
+                                '<i class="fa-solid fa-eye"></i>';
+
+                        }
+
+                    });
 
                 });
 
-            });
+                const form = document.getElementById("passwordForm");
 
-            const form = document.getElementById("passwordForm");
+                form.addEventListener("submit", function () {
 
-            form.addEventListener("submit", function () {
+                    setTimeout(() => {
 
-                setTimeout(() => {
+                        form.reset();
 
-                    form.reset();
+                    }, 100);
 
-                }, 100);
-
-            });
+                });
 
 
-        </script>
+            </script>
 
 </body>
 

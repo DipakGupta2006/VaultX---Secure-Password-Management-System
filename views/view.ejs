@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="/css/view.css">
     <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/footer.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -162,42 +163,43 @@
                     <% } %>
 
         </div>
+        <%- include("partials/footer") %>
 
-        <script>
+            <script>
 
-            const buttons =
-                document.querySelectorAll(".show-btn");
+                const buttons =
+                    document.querySelectorAll(".show-btn");
 
-            buttons.forEach(button => {
+                buttons.forEach(button => {
 
-                button.addEventListener("click", () => {
+                    button.addEventListener("click", () => {
 
-                    const span =
-                        button.parentElement.querySelector(".password-text");
+                        const span =
+                            button.parentElement.querySelector(".password-text");
 
-                    if (span.innerText === "********") {
+                        if (span.innerText === "********") {
 
-                        span.innerText =
-                            span.dataset.password;
+                            span.innerText =
+                                span.dataset.password;
 
-                        button.innerHTML =
-                            '<i class="fa-solid fa-eye-slash"></i>';
+                            button.innerHTML =
+                                '<i class="fa-solid fa-eye-slash"></i>';
 
-                    }
-                    else {
+                        }
+                        else {
 
-                        span.innerText = "********";
+                            span.innerText = "********";
 
-                        button.innerHTML =
-                            '<i class="fa-solid fa-eye"></i>';
+                            button.innerHTML =
+                                '<i class="fa-solid fa-eye"></i>';
 
-                    }
+                        }
+
+                    });
 
                 });
 
-            });
-
-        </script>
+            </script>
 
 </body>
 

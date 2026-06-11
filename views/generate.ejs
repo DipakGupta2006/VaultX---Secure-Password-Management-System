@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,189 +8,180 @@
 
     <link rel="stylesheet" href="/css/generate.css">
     <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/footer.css">
 
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 <body>
 
     <%- include("partials/navbar") %>
 
-    <div class="container">
+        <div class="container">
 
-        <div class="card">
+            <div class="card">
 
-            <h1>
-                <i class="fa-solid fa-key"></i>
-                Generate A Custom Strong Password
-            </h1>
+                <h1>
+                    <i class="fa-solid fa-key"></i>
+                    Generate A Custom Strong Password
+                </h1>
 
-            <p class="subtitle">
-                Create strong and secure passwords instantly.
-            </p>
+                <p class="subtitle">
+                    Create strong and secure passwords instantly.
+                </p>
 
-            <div class="form-group">
-                <label>Password Length</label>
+                <div class="form-group">
+                    <label>Password Length</label>
 
-                <input
-                    type="number"
-                    id="length"
-                    min="4"
-                    max="50"
-                    value="12"
-                    placeholder="Enter password length">
-            </div>
+                    <input type="number" id="length" min="4" max="50" value="12" placeholder="Enter password length">
+                </div>
 
-            <div class="options">
+                <div class="options">
 
-                <label>
-                    <input type="checkbox" id="letters" checked>
-                    Letters (A-Z, a-z)
-                </label>
+                    <label>
+                        <input type="checkbox" id="letters" checked>
+                        Letters (A-Z, a-z)
+                    </label>
 
-                <label>
-                    <input type="checkbox" id="numbers" checked>
-                    Numbers (0-9)
-                </label>
+                    <label>
+                        <input type="checkbox" id="numbers" checked>
+                        Numbers (0-9)
+                    </label>
 
-                <label>
-                    <input type="checkbox" id="symbols">
-                    Special Symbols
-                </label>
+                    <label>
+                        <input type="checkbox" id="symbols">
+                        Special Symbols
+                    </label>
 
-            </div>
+                </div>
 
-            <button
-                class="generate-btn"
-                onclick="generatePassword()">
+                <button class="generate-btn" onclick="generatePassword()">
 
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
-                Generate Password
-
-            </button>
-
-            <div class="result-box">
-
-                <input
-                    type="text"
-                    id="result"
-                    readonly
-                    placeholder="Generated password will appear here">
-
-                <button
-                    class="copy-btn"
-                    onclick="copyPassword()">
-
-                    <i class="fa-regular fa-copy"></i>
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    Generate Password
 
                 </button>
 
-            </div>
+                <div class="result-box">
 
-            <div id="strength" class="strength">
-                Password Strength: -
-            </div>
+                    <input type="text" id="result" readonly placeholder="Generated password will appear here">
 
-            <div class="copy-msg" id="copyMsg">
-                Password copied successfully!
+                    <button class="copy-btn" onclick="copyPassword()">
+
+                        <i class="fa-regular fa-copy"></i>
+
+                    </button>
+
+                </div>
+
+                <div id="strength" class="strength">
+                    Password Strength: -
+                </div>
+
+                <div class="copy-msg" id="copyMsg">
+                    Password copied successfully!
+                </div>
+
             </div>
 
         </div>
+        <%- include("partials/footer") %>
 
-    </div>
 
-<script>
+            <script>
 
-function generatePassword(){
+                function generatePassword() {
 
-    const length =
-    parseInt(document.getElementById("length").value);
+                    const length =
+                        parseInt(document.getElementById("length").value);
 
-    const includeLetters =
-    document.getElementById("letters").checked;
+                    const includeLetters =
+                        document.getElementById("letters").checked;
 
-    const includeNumbers =
-    document.getElementById("numbers").checked;
+                    const includeNumbers =
+                        document.getElementById("numbers").checked;
 
-    const includeSymbols =
-    document.getElementById("symbols").checked;
+                    const includeSymbols =
+                        document.getElementById("symbols").checked;
 
-    let chars = "";
+                    let chars = "";
 
-    if(includeLetters)
-        chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+                    if (includeLetters)
+                        chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-    if(includeNumbers)
-        chars += "0123456789";
+                    if (includeNumbers)
+                        chars += "0123456789";
 
-    if(includeSymbols)
-        chars += "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+                    if (includeSymbols)
+                        chars += "!@#$%^&*()_+~`|}{[]:;?><,./-=";
 
-    if(chars === ""){
-        alert("Select at least one option.");
-        return;
-    }
+                    if (chars === "") {
+                        alert("Select at least one option.");
+                        return;
+                    }
 
-    let password = "";
+                    let password = "";
 
-    for(let i=0;i<length;i++){
+                    for (let i = 0; i < length; i++) {
 
-        password += chars.charAt(
-            Math.floor(Math.random()*chars.length)
-        );
+                        password += chars.charAt(
+                            Math.floor(Math.random() * chars.length)
+                        );
 
-    }
+                    }
 
-    document.getElementById("result").value =
-    password;
+                    document.getElementById("result").value =
+                        password;
 
-    const strength =
-    document.getElementById("strength");
+                    const strength =
+                        document.getElementById("strength");
 
-    if(length < 8){
+                    if (length < 8) {
 
-        strength.innerHTML =
-        "Password Strength: Weak";
+                        strength.innerHTML =
+                            "Password Strength: Weak";
 
-    }
-    else if(length < 12){
+                    }
+                    else if (length < 12) {
 
-        strength.innerHTML =
-        "Password Strength: Medium";
+                        strength.innerHTML =
+                            "Password Strength: Medium";
 
-    }
-    else{
+                    }
+                    else {
 
-        strength.innerHTML =
-        "Password Strength: Strong";
+                        strength.innerHTML =
+                            "Password Strength: Strong";
 
-    }
+                    }
 
-}
+                }
 
-function copyPassword(){
+                function copyPassword() {
 
-    const password =
-    document.getElementById("result").value;
+                    const password =
+                        document.getElementById("result").value;
 
-    if(password === "") return;
+                    if (password === "") return;
 
-    navigator.clipboard.writeText(password);
+                    navigator.clipboard.writeText(password);
 
-    const msg =
-    document.getElementById("copyMsg");
+                    const msg =
+                        document.getElementById("copyMsg");
 
-    msg.style.display = "block";
+                    msg.style.display = "block";
 
-    setTimeout(() => {
+                    setTimeout(() => {
 
-        msg.style.display = "none";
+                        msg.style.display = "none";
 
-    }, 2000);
+                    }, 2000);
 
-}
+                }
 
-</script>
+            </script>
 
 </body>
+
 </html>

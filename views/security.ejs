@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="/css/navbar.css">
 
     <link rel="stylesheet" href="/css/security.css">
+    <link rel="stylesheet" href="/css/footer.css">
+
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -225,460 +227,461 @@
 
 
 
+        <%- include("partials/footer") %>
 
 
-        <script>
+            <script>
 
 
-            const password =
-                document.getElementById("password");
+                const password =
+                    document.getElementById("password");
 
 
-            const progress =
-                document.getElementById("progress");
+                const progress =
+                    document.getElementById("progress");
 
 
-            const strengthText =
-                document.getElementById("strengthText");
+                const strengthText =
+                    document.getElementById("strengthText");
 
 
 
 
 
-            password.addEventListener(
-                "input",
-                checkPassword
-            );
-
-
-
-
-
-            function checkPassword() {
-
-
-                let value = password.value;
-
-
-                let score = 0;
-
-
-
-
-
-                // Length
-
-
-                if (value.length >= 8) {
-
-                    score++;
-
-                    success("length");
-
-                }
-
-                else {
-
-                    fail("length");
-
-                }
-
-
-
-
-
-
-                // Uppercase
-
-
-                if (/[A-Z]/.test(value)) {
-
-
-                    score++;
-
-                    success("uppercase");
-
-
-                }
-
-                else {
-
-                    fail("uppercase");
-
-                }
-
-
-
-
-
-
-
-                // Lowercase
-
-
-                if (/[a-z]/.test(value)) {
-
-
-                    score++;
-
-                    success("lowercase");
-
-
-                }
-
-                else {
-
-                    fail("lowercase");
-
-                }
-
-
-
-
-
-
-
-                // Number
-
-
-                if (/[0-9]/.test(value)) {
-
-
-                    score++;
-
-                    success("number");
-
-
-                }
-
-                else {
-
-                    fail("number");
-
-                }
-
-
-
-
-
-
-
-
-                // Special Characters
-
-
-                let special =
-                    value.match(/[!@#$%^&*]/g);
-
-
-
-                if (special && special.length >= 5) {
-
-
-                    score++;
-
-                    success("specialCount");
-
-
-                }
-
-                else {
-
-                    fail("specialCount");
-
-                }
-
-
-
-
-
-
-
-
-                // Space
-
-
-                if (value.length > 0 && !/\s/.test(value)) {
-
-
-                    score++;
-
-                    success("space");
-
-
-                }
-
-                else {
-
-
-                    fail("space");
-
-
-                }
-
-
-
-
-
-
-
-                // Common Password
-
-
-                let common = [
-
-                    "password",
-                    "123456",
-                    "qwerty",
-                    "admin"
-
-                ];
-
-
-
-                if (common.includes(value.toLowerCase())) {
-
-
-                    strengthText.innerHTML =
-                        "Common Password ❌";
-
-
-                    progress.style.width = "10%";
-
-                    progress.style.background = "#ff4d4d";
-
-
-                    copyBtn.style.display = "none";
-
-
-                    return;
-
-
-                }
-
-
-
-
-
-
-
-                let percentage =
-                    (score / 6) * 100;
-
-
-
-                progress.style.width =
-                    percentage + "%";
-
-
-
-
-
-
-
-                if (score <= 2) {
-
-
-                    strengthText.innerHTML =
-                        "Weak Password ❌";
-
-
-                    progress.style.background =
-                        "#ff4d4d";
-
-
-                    copyBtn.style.display = "none";
-
-
-                }
-
-
-
-                else if (score <= 5) {
-
-
-                    strengthText.innerHTML =
-                        "Medium Password ⚠️";
-
-
-                    progress.style.background =
-                        "#ffa500";
-
-
-                    copyBtn.style.display = "none";
-
-
-                }
-
-
-
-                else {
-
-
-                    strengthText.innerHTML =
-                        "Strong Password 🔥";
-
-
-                    progress.style.background =
-                        "#2ecc71";
-
-
-                    copyBtn.style.display = "block";
-
-
-                }
-
-
-
-            }
-
-
-
-
-
-
-
-            function success(id) {
-
-
-                let element =
-                    document.getElementById(id);
-
-
-
-                element.style.color = "#2ecc71";
-
-
-
-                element.querySelector("i").className =
-                    "fa-solid fa-circle-check";
-
-
-            }
-
-
-
-
-
-            function fail(id) {
-
-
-                let element =
-                    document.getElementById(id);
-
-
-
-                element.style.color = "#555";
-
-
-
-                element.querySelector("i").className =
-                    "fa-solid fa-circle-xmark";
-
-
-            }
-
-
-
-
-
-
-
-            // Show Hide Password
-
-
-            const toggle =
-                document.getElementById("togglePassword");
-
-
-
-            toggle.onclick = () => {
-
-
-                if (password.type === "password") {
-
-
-                    password.type = "text";
-
-
-                    toggle.classList.replace(
-                        "fa-eye",
-                        "fa-eye-slash"
-                    );
-
-
-                }
-
-                else {
-
-
-                    password.type = "password";
-
-
-                    toggle.classList.replace(
-                        "fa-eye-slash",
-                        "fa-eye"
-                    );
-
-
-                }
-
-
-            }
-
-
-
-
-
-
-
-
-            // Copy Password
-
-
-            const copyBtn =
-                document.getElementById("copyBtn");
-
-
-            const copyMsg =
-                document.getElementById("copyMsg");
-
-
-
-            copyBtn.style.display = "none";
-
-
-
-            copyBtn.onclick = () => {
-
-
-                navigator.clipboard.writeText(
-                    password.value
+                password.addEventListener(
+                    "input",
+                    checkPassword
                 );
 
 
 
-                copyMsg.innerHTML =
-                    "Password copied successfully ✅";
 
 
-
-                setTimeout(() => {
-
-
-                    copyMsg.innerHTML = "";
+                function checkPassword() {
 
 
-                }, 2000);
+                    let value = password.value;
 
 
-
-            }
+                    let score = 0;
 
 
 
 
-        </script>
+
+                    // Length
+
+
+                    if (value.length >= 8) {
+
+                        score++;
+
+                        success("length");
+
+                    }
+
+                    else {
+
+                        fail("length");
+
+                    }
+
+
+
+
+
+
+                    // Uppercase
+
+
+                    if (/[A-Z]/.test(value)) {
+
+
+                        score++;
+
+                        success("uppercase");
+
+
+                    }
+
+                    else {
+
+                        fail("uppercase");
+
+                    }
+
+
+
+
+
+
+
+                    // Lowercase
+
+
+                    if (/[a-z]/.test(value)) {
+
+
+                        score++;
+
+                        success("lowercase");
+
+
+                    }
+
+                    else {
+
+                        fail("lowercase");
+
+                    }
+
+
+
+
+
+
+
+                    // Number
+
+
+                    if (/[0-9]/.test(value)) {
+
+
+                        score++;
+
+                        success("number");
+
+
+                    }
+
+                    else {
+
+                        fail("number");
+
+                    }
+
+
+
+
+
+
+
+
+                    // Special Characters
+
+
+                    let special =
+                        value.match(/[!@#$%^&*]/g);
+
+
+
+                    if (special && special.length >= 5) {
+
+
+                        score++;
+
+                        success("specialCount");
+
+
+                    }
+
+                    else {
+
+                        fail("specialCount");
+
+                    }
+
+
+
+
+
+
+
+
+                    // Space
+
+
+                    if (value.length > 0 && !/\s/.test(value)) {
+
+
+                        score++;
+
+                        success("space");
+
+
+                    }
+
+                    else {
+
+
+                        fail("space");
+
+
+                    }
+
+
+
+
+
+
+
+                    // Common Password
+
+
+                    let common = [
+
+                        "password",
+                        "123456",
+                        "qwerty",
+                        "admin"
+
+                    ];
+
+
+
+                    if (common.includes(value.toLowerCase())) {
+
+
+                        strengthText.innerHTML =
+                            "Common Password ❌";
+
+
+                        progress.style.width = "10%";
+
+                        progress.style.background = "#ff4d4d";
+
+
+                        copyBtn.style.display = "none";
+
+
+                        return;
+
+
+                    }
+
+
+
+
+
+
+
+                    let percentage =
+                        (score / 6) * 100;
+
+
+
+                    progress.style.width =
+                        percentage + "%";
+
+
+
+
+
+
+
+                    if (score <= 2) {
+
+
+                        strengthText.innerHTML =
+                            "Weak Password ❌";
+
+
+                        progress.style.background =
+                            "#ff4d4d";
+
+
+                        copyBtn.style.display = "none";
+
+
+                    }
+
+
+
+                    else if (score <= 5) {
+
+
+                        strengthText.innerHTML =
+                            "Medium Password ⚠️";
+
+
+                        progress.style.background =
+                            "#ffa500";
+
+
+                        copyBtn.style.display = "none";
+
+
+                    }
+
+
+
+                    else {
+
+
+                        strengthText.innerHTML =
+                            "Strong Password 🔥";
+
+
+                        progress.style.background =
+                            "#2ecc71";
+
+
+                        copyBtn.style.display = "block";
+
+
+                    }
+
+
+
+                }
+
+
+
+
+
+
+
+                function success(id) {
+
+
+                    let element =
+                        document.getElementById(id);
+
+
+
+                    element.style.color = "#2ecc71";
+
+
+
+                    element.querySelector("i").className =
+                        "fa-solid fa-circle-check";
+
+
+                }
+
+
+
+
+
+                function fail(id) {
+
+
+                    let element =
+                        document.getElementById(id);
+
+
+
+                    element.style.color = "#555";
+
+
+
+                    element.querySelector("i").className =
+                        "fa-solid fa-circle-xmark";
+
+
+                }
+
+
+
+
+
+
+
+                // Show Hide Password
+
+
+                const toggle =
+                    document.getElementById("togglePassword");
+
+
+
+                toggle.onclick = () => {
+
+
+                    if (password.type === "password") {
+
+
+                        password.type = "text";
+
+
+                        toggle.classList.replace(
+                            "fa-eye",
+                            "fa-eye-slash"
+                        );
+
+
+                    }
+
+                    else {
+
+
+                        password.type = "password";
+
+
+                        toggle.classList.replace(
+                            "fa-eye-slash",
+                            "fa-eye"
+                        );
+
+
+                    }
+
+
+                }
+
+
+
+
+
+
+
+
+                // Copy Password
+
+
+                const copyBtn =
+                    document.getElementById("copyBtn");
+
+
+                const copyMsg =
+                    document.getElementById("copyMsg");
+
+
+
+                copyBtn.style.display = "none";
+
+
+
+                copyBtn.onclick = () => {
+
+
+                    navigator.clipboard.writeText(
+                        password.value
+                    );
+
+
+
+                    copyMsg.innerHTML =
+                        "Password copied successfully ✅";
+
+
+
+                    setTimeout(() => {
+
+
+                        copyMsg.innerHTML = "";
+
+
+                    }, 2000);
+
+
+
+                }
+
+
+
+
+            </script>
 
 
 

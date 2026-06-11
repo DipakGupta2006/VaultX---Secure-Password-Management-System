@@ -110,13 +110,7 @@ app.get('/logout', (req, res) => {
     }
 });
 
-// app.get("/dashboard", (req, res) => {
-//     if (!req.session || !req.session.username) {
-//         return res.redirect("/");
-//     }
 
-//     res.render("Dashboard", { username: req.session.username.toUpperCase() });
-// });
 
 // Authentication middleware: allow only logged-in users
 function requireLogin(req, res, next) {
